@@ -1,24 +1,33 @@
-from pymongo.mongo_client import MongoClient
+#from pymongo.mongo_client import MongoClient
 import pymongo
 import json
 import pandas as pd
 
-client = "mongodb+srv://shashi:sasidb09@cluster0.36yyeo2.mongodb.net/?retryWrites=true&w=majority"
+# MongoDB connection URI
+uri = "mongodb+srv://sasi:sasi123@cluster0.5st7jeq.mongodb.net/?retryWrites=true&w=majority"
 
-DATA_FILE_PATH = "/Users/shashidivya/Desktop/aug_train.csv"
+DATA_FILE_PATH = r"/Users/shashidivya/Desktop/Ml_New_Mac/Mlops_Mac/Data/train.csv"
 DATABASE = "Machine_learning"
 COLLECTION_NAME = "DATASET"
 
-
 if __name__ == "__main__":
+    # Read data from the CSV file into a Pandas DataFrame
     df = pd.read_csv(DATA_FILE_PATH)
+    print(f"Rows and columns: {df.shape}")
 
-    print(f"Rows and columns of our Data : {df.shape}")
+    # Convert the DataFrame to a list of dictionaries (JSON records)
+    json_records = json.loads(df.to_json(orient="records"))
+    print(json_records[0])
 
-    df.reset_index(drop=True,inplace=True)
+    # Establish a connection to MongoDB
+    client = pymongo.MongoClient(uri)
 
-    json_record = list(json.loads(df.T.to_json()).values())
+    # Access the desired database and collection
+    db = client[DATABASE]
+    collection = db[COLLECTION_NAME]
 
-    print(json_record[0])
+    # Insert the JSON records into the collection
+    collection.insert_many(json_records)
 
-    client[DATABASE][COLLECTION_NAME].insert_many(json_record)
+    # Close the MongoDB connection
+    client.close()
