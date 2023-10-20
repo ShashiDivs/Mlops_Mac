@@ -1,0 +1,18 @@
+
+training_pipeleine_config:
+  pipleine_name: Artifact
+  artifact_dir: artifact
+
+
+
+#artifact/data_ingestion/raw_data & ingested_data /Trian & Test
+data_ingestion_config:
+  database: Machine_learning
+  collection_name: DATASET
+  data_ingestion: data_ingestion
+  raw_data_dir: raw_data
+  ingested_dir: ingested_data
+  ingested_train_dir: Train
+  ingested_test_dir: Test
+
+

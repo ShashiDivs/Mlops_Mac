@@ -1,0 +1,20 @@
+1. Data Ingestion pipeline
+
+a. config.yaml
+b. constant file
+c. config_entity
+d. artifcat_entity
+e. helper_function
+f. data_ingestion file
+g. trianing_pipeline
+h. testing
+
+
+a. config.yaml
+b. config_entity
+c. artifcat_entity
+d. constant file
+e. helper_function
+f. data_ingestion file
+g. trianing_pipeline
+h. testing

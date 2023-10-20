@@ -2,6 +2,8 @@
 import pymongo
 import json
 import pandas as pd
+import os,sys
+from schema import write_schema_yaml
 
 # MongoDB connection URI
 uri = "mongodb+srv://sasi:sasi123@cluster0.5st7jeq.mongodb.net/?retryWrites=true&w=majority"
@@ -11,7 +13,18 @@ DATABASE = "Machine_learning"
 COLLECTION_NAME = "DATASET"
 
 if __name__ == "__main__":
-    # Read data from the CSV file into a Pandas DataFrame
+
+
+
+    ROOT_DIR = os.getcwd()
+
+    DATA_FILE_PATH = os.path.join(ROOT_DIR,'Data','train.csv')
+
+    FILE_PATH = os.path.join(ROOT_DIR,DATA_FILE_PATH)
+
+    write_schema_yaml(csv_file=FILE_PATH)
+
+
     df = pd.read_csv(DATA_FILE_PATH)
     print(f"Rows and columns: {df.shape}")
 
@@ -31,3 +44,6 @@ if __name__ == "__main__":
 
     # Close the MongoDB connection
     client.close()
+
+
+
